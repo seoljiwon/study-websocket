@@ -176,6 +176,10 @@ socket.on("ice", (ice) => {
   myPeerConnection.addIceCandidate(ice);
 });
 
+socket.on("bye", () => {
+  handleRemoveStream();
+});
+
 // RTC Code
 
 function makeConnection() {
@@ -208,6 +212,11 @@ function handleIce(data) {
 function handleAddStream(data) {
   const peersFace = document.getElementById("peersFace");
   peersFace.srcObject = data.stream;
+}
+
+function handleRemoveStream() {
+  const peersFace = document.getElementById("peersFace");
+  peersFace.srcObject = null;
 }
 
 function handleTrack(data) {
